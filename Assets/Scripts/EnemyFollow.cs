@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
@@ -15,9 +16,8 @@ public class EnemyFollow : MonoBehaviour
     public Transform spawnPoint;
     public float bulletspeed;
 
-    void Start()
+    void Awake()
     {
-        
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
@@ -29,8 +29,12 @@ public class EnemyFollow : MonoBehaviour
         {
             Debug.LogError("No se encontró ningún objeto con el tag 'Player'");
         }
+        
     }
-
+    private void Start()
+    {
+        StartCoroutine(Shoot());
+    }
     void Update()
     {
         if (player == null) return;
@@ -49,40 +53,28 @@ public class EnemyFollow : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
 
-        //Shoot Bullet
-        //ShootAtPlayer();
     }
-
-    /*
-    void ShootAtPlayer()
+    IEnumerator Shoot()
     {
-        bulletTime -= Time.deltaTime;
-
-        if (bulletTime > 0)
+        while (true)
         {
-            return;
+            yield return new WaitForSeconds(timer);
+
+            GameObject bulletObj = Instantiate(enemyBullet, spawnPoint.position, this.transform.rotation);
+            Rigidbody bulletRb = bulletObj.GetComponent<Rigidbody>();
+            if (bulletRb != null)
+            {
+                bulletRb.AddForce(bulletObj.transform.forward * bulletspeed, ForceMode.Impulse);
+
+            }
         }
-
-        bulletTime = timer;
-
-        GameObject bulletObj = Instantiate(enemyBullet, spawnPoint.position, spawnPoint.rotation);
-        Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
-
-        if (bulletRig != null)
-        {
-            bulletRig.AddForce(spawnPoint.forward * bulletspeed, ForceMode.Impulse);
-        }
-
-        Destroy(bulletObj, 5f);
     }
-    */
 
-    void OnTriggerEnter(Collider other)
+ /*   void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("¡Jugador alcanzado!");
             other.gameObject.SetActive(false); 
         }
-    }
+    }*/
 }

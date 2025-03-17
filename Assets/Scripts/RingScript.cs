@@ -14,7 +14,7 @@ public class RingScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("¡Moneda recogida!");
+            //Debug.Log("¡Moneda recogida!");
 
             // Aumentar el puntaje 
             MovementScript player = other.GetComponent<MovementScript>();

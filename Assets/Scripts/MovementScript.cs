@@ -1,3 +1,4 @@
+using System.Transactions;
 using UnityEngine;
 using UnityEngine.UI; 
 
@@ -24,8 +25,8 @@ public class MovementScript : MonoBehaviour
     public int score = 0;
     private int highScore;
     public TMPro.TextMeshProUGUI scoreText;
-
-    public void Start()
+    public GameObject gameOver;
+    public void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
@@ -139,5 +140,20 @@ public class MovementScript : MonoBehaviour
     public void DesactivateGravity()
     {
         rb.useGravity = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            gameOver.SetActive(true);
+            Destroy(other.gameObject);
+            gameObject.SetActive(false);
+        }
+        if (other.CompareTag("Enemy"))
+        {
+            gameOver.SetActive(true);
+            gameObject.SetActive(false);
+        }
     }
 }
