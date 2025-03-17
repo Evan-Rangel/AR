@@ -12,7 +12,6 @@ public class SpawnRings : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] Transform target;
     
-    GameObject currentEnemy;
     void Start()
     {
         SpawnObject();
@@ -22,16 +21,15 @@ public class SpawnRings : MonoBehaviour
     {
         while (true)
         {
-            if (currentEnemy != null)
-                Destroy(currentEnemy);
+            yield return new WaitForSeconds(Random.Range(2, enemyRespawnTime));
+
             Vector3 randomOffset = new Vector3(
                 Random.Range(-spawnRange.x, spawnRange.x),
                 0.015f,
                 Random.Range(-spawnRange.z, spawnRange.z)
             );
 
-            currentEnemy= Instantiate(enemyPrefab, spawnPoint.position + randomOffset, Quaternion.identity, target);
-            yield return new WaitForSeconds(Random.Range(5, enemyRespawnTime));
+            Instantiate(enemyPrefab, spawnPoint.position + randomOffset, Quaternion.identity, target);
         }
     }
 

@@ -362,7 +362,7 @@ MonoBehaviour:
   ringPrefab: {fileID: 8448678155031708655, guid: a0582a96412bbd9488e0dbabd08b8f11, type: 3}
   spawnPoint: {fileID: 112086378}
   spawnRange: {x: 0.04, y: 0, z: 0.04}
-  enemyRespawnTime: 10
+  enemyRespawnTime: 7
   enemyPrefab: {fileID: 8689017276683944440, guid: 73c45bdc6f0834447b308de27ebbfe19, type: 3}
   target: {fileID: 280616044}
 --- !u!1001 &188701355

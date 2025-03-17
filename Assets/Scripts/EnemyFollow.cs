@@ -34,6 +34,7 @@ public class EnemyFollow : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Shoot());
+        StartCoroutine(Kill()); 
     }
     void Update()
     {
@@ -69,7 +70,12 @@ public class EnemyFollow : MonoBehaviour
             }
         }
     }
-
+    IEnumerator Kill()
+    {
+        yield return new WaitForSeconds(Random.Range(5,10));
+        Destroy(gameObject);
+        
+    }
  /*   void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
