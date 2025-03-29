@@ -1,22 +1,24 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager:MonoBehaviour
 {
+    [SerializeField] PlayerController playerOne;
+    [SerializeField] PlayerController playerTwo;
+    [SerializeField] GameObject holder;
+    [SerializeField] GameObject characterUIPrefab;
+    public static GameManager instance;
 
-    public Vector3 playerPosition;
-
-    public void Start()
+    private void Awake()
     {
-        playerPosition = transform.position;
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
-    public void Restart()
-    {
-        transform.position = playerPosition;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void ShowCharacter()
+    { 
+        GameObject tempChar= Instantiate(characterUIPrefab, holder.transform);
+        tempChar.GetComponent<CharacterUIManager>().LoadActions(playerOne.character[0]);
     }
 }
