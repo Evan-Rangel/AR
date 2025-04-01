@@ -7,11 +7,15 @@ public class ActionUIManager:MonoBehaviour
 {
     [SerializeField] TMP_Text nameText;
     [SerializeField] List<GameObject> energyCostImages;
-    [SerializeField] List<GameObject> energyCostTexts;
+    [SerializeField] GameObject energyCostTexts;
+    [field:SerializeField] public int energyCost { get; private set; }  
+    [field:SerializeField] public ElementType elementType { get; private set; }  
 
     public void SetActionData(ActionData actionData)
     {
         nameText.text = actionData.actionName;
+        energyCost = actionData.energyCost;
+        elementType = actionData.elementType;
         for (int i = 0; i < energyCostImages.Count; i++)
         {
             energyCostImages[i].SetActive(false);
@@ -23,18 +27,18 @@ public class ActionUIManager:MonoBehaviour
                 energyCostImages[i].SetActive(true);
                 SetImageColor(energyCostImages[i].GetComponent<Image>(), actionData.elementType);
             }
-            energyCostTexts[0].SetActive(false);
-            energyCostTexts[1].SetActive(false);
+            energyCostTexts.SetActive(false);
+            energyCostTexts.SetActive(false);
         }
         else
         {
             energyCostImages[0].SetActive(true);
             SetImageColor(energyCostImages[0].GetComponent<Image>(), actionData.elementType);
 
-            energyCostTexts[0].SetActive(true);
-            energyCostTexts[1].SetActive(true);
-            energyCostTexts[1].GetComponent<TMP_Text>().text = actionData.energyCost.ToString();
-            energyCostTexts[0].GetComponent<TMP_Text>().text = "X";
+            energyCostTexts.SetActive(true);
+            energyCostTexts.SetActive(true);
+            energyCostTexts.GetComponent<TMP_Text>().text = actionData.energyCost.ToString();
+            //energyCostTexts[0].GetComponent<TMP_Text>().text = "X";
         }
     }
     void SetImageColor(Image _img, ElementType _type)
@@ -47,16 +51,12 @@ public class ActionUIManager:MonoBehaviour
             case ElementType.Agua:
                 _img.color = Color.blue;
                 break;
-            case ElementType.Rayo:
-                _img.color = Color.yellow;
-                break;
-            case ElementType.Aire:
-                _img.color = Color.white;
-                break;
             case ElementType.Planta:
                 _img.color = Color.green;
                 break;
-            
+            case ElementType.Normal:
+                _img.color = Color.white;
+                break;
         }
     }
 }
