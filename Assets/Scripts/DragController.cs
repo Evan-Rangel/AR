@@ -58,7 +58,9 @@ public class DragController : MonoBehaviour
     void InitDrag()
     {
         isDragActive = true;
-        _lastDragged.transform.gameObject.GetComponent<Draggable>().OnDrag();
+        _lastDragged.gameObject.GetComponent<Draggable>().OnDrag();
+        //_lastDragged.transform.parent = null;
+        //_lastDragged.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
 
     void Drop()

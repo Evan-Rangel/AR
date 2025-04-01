@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     Image[] currentPokeball;
     [SerializeField] int pokeballs = 3;
     [SerializeField] Sprite pokeballXSprite;
+    [field: SerializeField]public string playerName { get; private set; } 
     private void Awake()
     {
         currentPokeball= pokeballHolder.GetComponentsInChildren<Image>();

@@ -15,7 +15,7 @@ public class EnergyManager: Draggable
     private void Start()
     {
 
-        elementType = ElementType.Agua;//(ElementType)UnityEngine.Random.Range(0, (int)Enum.GetValues(typeof(ElementType)).Cast<ElementType>().Max());
+        elementType = (ElementType)UnityEngine.Random.Range(0, (int)Enum.GetValues(typeof(ElementType)).Cast<ElementType>().Max());
         switch (elementType)
         {           case ElementType.Fuego:
                spriteRenderer.color = Color.red;
