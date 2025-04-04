@@ -8,21 +8,19 @@ public class MenuController : MonoBehaviour
     [Header("Panel de Inicio")]
     [SerializeField] private GameObject panelInicio;
 
-    [Header("Panel Jugador 1")]
-    [SerializeField] private GameObject panelJugador1;
+    [Header("Panel Jugadores")]
+    [SerializeField] private GameObject panelJugadores;
     [SerializeField] private TMP_InputField inputNombre1;
-    [SerializeField] private Button botonConfirmar1;
+    [SerializeField] private TMP_InputField inputNombre2;
+    [SerializeField] private Button botonConfirmar;
 
+    [Header("Botones de Elementos Jugador 1")]
     [SerializeField] private Button botonFuego1;
     [SerializeField] private Button botonAgua1;
     [SerializeField] private Button botonPlanta1;
     [SerializeField] private Button botonNormal1;
 
-    [Header("Panel Jugador 2")]
-    [SerializeField] private GameObject panelJugador2;
-    [SerializeField] private TMP_InputField inputNombre2;
-    [SerializeField] private Button botonConfirmar2;
-
+    [Header("Botones de Elementos Jugador 2")]
     [SerializeField] private Button botonFuego2;
     [SerializeField] private Button botonAgua2;
     [SerializeField] private Button botonPlanta2;
@@ -34,22 +32,21 @@ public class MenuController : MonoBehaviour
 
     void Start()
     {
-        // Solo el panel de inicio estará activo
         panelInicio.SetActive(true);
-        panelJugador1.SetActive(false);
-        panelJugador2.SetActive(false);
+        panelJugadores.SetActive(false);
+        botonConfirmar.interactable = false;
+
+        inputNombre1.onValueChanged.AddListener(delegate { ValidarConfirmacion(); });
+        inputNombre2.onValueChanged.AddListener(delegate { ValidarConfirmacion(); });
     }
 
-    // Método para iniciar el registro de los jugadores
     public void IniciarJuego()
     {
         panelInicio.SetActive(false);
-        panelJugador1.SetActive(true);
-        ResetearBotones(1);
-        botonConfirmar1.interactable = false;
+        panelJugadores.SetActive(true);
+        ResetearBotones();
     }
 
-    // Métodos para seleccionar elementos
     public void SeleccionarFuego1() => SeleccionarElemento(1, botonFuego1, "Fuego");
     public void SeleccionarAgua1() => SeleccionarElemento(1, botonAgua1, "Agua");
     public void SeleccionarPlanta1() => SeleccionarElemento(1, botonPlanta1, "Planta");
@@ -75,28 +72,21 @@ public class MenuController : MonoBehaviour
             SetAlpha(boton, 1.0f);
         }
 
-        if (jugador == 1)
-            botonConfirmar1.interactable = elementosJugador1.Count > 0;
-        else
-            botonConfirmar2.interactable = elementosJugador2.Count > 0;
+        ValidarConfirmacion();
     }
 
-    public void ConfirmarJugador1()
+    private void ValidarConfirmacion()
+    {
+        bool nombresValidos = !string.IsNullOrEmpty(inputNombre1.text) && !string.IsNullOrEmpty(inputNombre2.text);
+        bool elementosValidos = elementosJugador1.Count > 0 && elementosJugador2.Count > 0;
+        botonConfirmar.interactable = nombresValidos && elementosValidos;
+    }
+
+    public void ConfirmarJugadores()
     {
         nombreJugador1 = inputNombre1.text;
-
-        panelJugador1.SetActive(false);
-        panelJugador2.SetActive(true);
-
-        ResetearBotones(2);
-        botonConfirmar2.interactable = false;
-    }
-
-    public void ConfirmarJugador2()
-    {
         nombreJugador2 = inputNombre2.text;
 
-        // Guardar datos en PlayerPrefs
         PlayerPrefs.SetString("NombreJugador1", nombreJugador1);
         PlayerPrefs.SetString("ElementoJugador1", string.Join(",", elementosJugador1));
 
@@ -104,28 +94,22 @@ public class MenuController : MonoBehaviour
         PlayerPrefs.SetString("ElementoJugador2", string.Join(",", elementosJugador2));
         PlayerPrefs.Save();
 
-        // Cargar la siguiente escena
         UnityEngine.SceneManagement.SceneManager.LoadScene("EscenaJuego");
     }
 
-    private void ResetearBotones(int jugador)
+    private void ResetearBotones()
     {
-        if (jugador == 1)
-        {
-            SetAlpha(botonFuego1, 0.5f);
-            SetAlpha(botonAgua1, 0.5f);
-            SetAlpha(botonPlanta1, 0.5f);
-            SetAlpha(botonNormal1, 0.5f);
-            elementosJugador1.Clear();
-        }
-        else
-        {
-            SetAlpha(botonFuego2, 0.5f);
-            SetAlpha(botonAgua2, 0.5f);
-            SetAlpha(botonPlanta2, 0.5f);
-            SetAlpha(botonNormal2, 0.5f);
-            elementosJugador2.Clear();
-        }
+        ResetearBotonesJugador(botonFuego1, botonAgua1, botonPlanta1, botonNormal1, elementosJugador1);
+        ResetearBotonesJugador(botonFuego2, botonAgua2, botonPlanta2, botonNormal2, elementosJugador2);
+    }
+
+    private void ResetearBotonesJugador(Button fuego, Button agua, Button planta, Button normal, List<string> elementos)
+    {
+        SetAlpha(fuego, 0.5f);
+        SetAlpha(agua, 0.5f);
+        SetAlpha(planta, 0.5f);
+        SetAlpha(normal, 0.5f);
+        elementos.Clear();
     }
 
     private void SetAlpha(Button boton, float alpha)
