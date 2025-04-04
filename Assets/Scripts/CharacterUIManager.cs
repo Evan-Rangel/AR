@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using System;
 public class CharacterUIManager : MonoBehaviour
 {
-    [SerializeField] GameObject grid;
+    [field: SerializeField] public GameObject grid { get; private set; }
     [SerializeField] GameObject actionUIPrefab;
     [SerializeField] GameObject actionPrefab;
     [SerializeField] Image background;
@@ -16,33 +16,31 @@ public class CharacterUIManager : MonoBehaviour
     [SerializeField] List<GameObject> energyImages;
     [SerializeField] List<GameObject> energyTxt;
 
+    [SerializeField] Animator effectAnimator;
     public CharacterData data;
     Dictionary<ElementType, int> energyElements;
     public UnityEvent deathEvent;
     float currentHealth;
-    [field: SerializeField]public GameObject  selectCardButton{ get; private set; }
+    [field: SerializeField] public GameObject selectCardButton { get; private set; }
     [field: SerializeField] public GameObject recieveDamageButton { get; private set; }
-    private void Start() 
+    private void Start()
     {
         LoadActions(data);
         energyElements = new Dictionary<ElementType, int>();
         foreach (ElementType elements in Enum.GetValues(typeof(ElementType)))
         {
-            energyElements[elements]= 0;
+            energyElements[elements] = 0;
         }
         recieveDamageButton.GetComponent<Button>().onClick.AddListener(() => RecieveDamage(ref GameManager.instance.currentDamage));
-        selectCardButton.GetComponent<Button>().onClick.AddListener(()=>SelectCard());
         deathEvent.AddListener(() => GameManager.instance.CharacterDeath(data.charName));
+        deathEvent.AddListener(() => transform.root.gameObject.SetActive(false));
+        deathEvent.AddListener(() => GameManager.instance.StartText(data.charName + " muere"));
+
         recieveDamageButton.SetActive(false);
         selectCardButton.SetActive(false);
 
     }
-    public void SelectCard()
-    { 
-        grid.SetActive(true);
-        selectCardButton.SetActive(false);
-        
-    }
+   
     public void SetPlayerName(string _name)
     {
         playerNameTxt.text = _name;
@@ -50,26 +48,24 @@ public class CharacterUIManager : MonoBehaviour
     public void RecieveDamage(ref int damage)
     {
         currentHealth -= damage;
-        if(currentHealth>data.health) currentHealth = data.health;
-        if (currentHealth<=0)
-        {
-            deathEvent.Invoke();
-            transform.root.gameObject.SetActive(false); 
-        }
+        if (currentHealth > data.health) currentHealth = data.health;
         characterHealthTxt.text = currentHealth.ToString() + "ps";
         GameManager.instance.DamageDeal(data.charName);
+        if (currentHealth <= 0)
+        {
+            deathEvent.Invoke();
+        }
     }
     public void AddEnergy(int _energy, ElementType element)
     {
         energyElements[element] += _energy;
-      
-        int count = 0;
-        Debug.Log(Enum.GetValues(typeof(ElementType)).Length);
 
+        int count = 0;
+        GameManager.instance.StartText(data.charName +" recive energia de " + element.ToString());
         foreach (ElementType e in Enum.GetValues(typeof(ElementType)))
         {
             if (energyElements[e] > 0)
-            {
+            { 
                 energyImages[count].SetActive(true);
                 energyTxt[count].SetActive(true);
                 energyTxt[count].GetComponent<TMP_Text>().text = energyElements[e].ToString();
@@ -80,6 +76,21 @@ public class CharacterUIManager : MonoBehaviour
             }
         }
     }
+    public void ColorCardEffect(bool _Active)
+    {
+        effectAnimator.SetBool("Effect", _Active);
+    }
+    public void ActiveDamage(bool _active)
+    {
+        if (_active == recieveDamageButton.activeSelf) return;
+        recieveDamageButton.SetActive(_active);
+        ColorCardEffect(_active);
+    }
+    public void ActiveCard(bool _active)
+    {
+        grid.SetActive(_active);
+    }
+    
     public void LoadEnergyImages(int _energy, ElementType element)
     {
         foreach (GameObject img in energyImages)
@@ -99,24 +110,7 @@ public class CharacterUIManager : MonoBehaviour
                 count++;
             }
         }
-        /*
-        if (_energy <= 4)
-        {
-
-            for (int i = 0; i < _energy; i++)
-            {
-                energyImages[i].SetActive(true);
-                SetCardColor(energyImages[i].GetComponent<Image>(), element);
-            }
-            energyTxt.SetActive(false);
-        }
-        else
-        {
-            energyImages[0].SetActive(true);
-            SetCardColor(energyImages[0].GetComponent<Image>(), element);
-            energyTxt.SetActive(true);
-            energyTxt.GetComponent<TMP_Text>().text = _energy.ToString();
-        }*/
+       
     }
     public void LoadActions(CharacterData data)
     {
@@ -140,10 +134,8 @@ public class CharacterUIManager : MonoBehaviour
         {
             GameManager.instance.ActiveAction(actionData.actionValue,data.charName );
             grid.SetActive(false);
-            Debug.Log("Action");
             return;
         }
-        Debug.Log("No energy");
     }
     void SetCardColor(Image _img, ElementType _type)
     {

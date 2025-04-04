@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,11 +10,15 @@ public class PlayerController : MonoBehaviour
     Image[] currentPokeball;
     [SerializeField] int pokeballs = 3;
     [SerializeField] Sprite pokeballXSprite;
-    [field: SerializeField]public string playerName { get; private set; } 
+    [field: SerializeField] public PlayerController enemyPlayer { get; private set; }
+    bool activeEffect;
+    [field: SerializeField]public string playerName { get; private set; }
+    public ElementType[] elementsEnergy; 
     private void Awake()
     {
         currentPokeball= pokeballHolder.GetComponentsInChildren<Image>();
         characterCards = new List<GameObject>();
+        activeEffect = false; 
     }
     public void LosePokeball()
     {
@@ -21,8 +26,7 @@ public class PlayerController : MonoBehaviour
         currentPokeball[pokeballs].sprite = pokeballXSprite;
         if (pokeballs <= 0)
         {
-
-            Debug.Log("Player Lose");
+            GameManager.instance.StartText(enemyPlayer.playerName + " Gano");
         }
     }
     public void AddCharacterToPlayer(GameObject _characterCard)
@@ -33,29 +37,32 @@ public class PlayerController : MonoBehaviour
     {
         foreach (GameObject card in characterCards)
         {
-            card.GetComponent<CharacterUIManager>().recieveDamageButton.SetActive(true);
+            card.GetComponent<CharacterUIManager>().ActiveDamage(true);
         }
     } 
     public void DisableDamageableCards()
     {
         foreach (GameObject card in characterCards)
         {
-            card.GetComponent<CharacterUIManager>().recieveDamageButton.SetActive(false);
+            card.GetComponent<CharacterUIManager>().ActiveDamage(false);
         }
     }
     public void ActiveSelectedCards()
     {
+        Debug.Log(playerName);
         foreach (GameObject card in characterCards)
         {
-            card.GetComponent<CharacterUIManager>().selectCardButton.SetActive(true);
+            card.GetComponent<CharacterUIManager>().ActiveCard(true);
         }
-    }public void DisableSelectedCards()
+    }
+    public void DisableSelectedCards()
     {
         foreach (GameObject card in characterCards)
         {
-            card.GetComponent<CharacterUIManager>().selectCardButton.SetActive(false);
+            card.GetComponent<CharacterUIManager>().ActiveCard(false);
         }
     }
+   
 }
 public enum ElementType {
 Fuego,Agua,Planta, Normal

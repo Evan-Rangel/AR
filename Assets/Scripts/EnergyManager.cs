@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnergyManager: Draggable
@@ -7,6 +8,7 @@ public class EnergyManager: Draggable
     [SerializeField] int energyCount = 1;
     [SerializeField] ElementType elementType;
     SpriteRenderer spriteRenderer;
+    public PlayerController target;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -14,8 +16,7 @@ public class EnergyManager: Draggable
     }
     private void Start()
     {
-
-        elementType = (ElementType)UnityEngine.Random.Range(0, (int)Enum.GetValues(typeof(ElementType)).Cast<ElementType>().Max());
+        elementType= GameManager.instance.currentPlayerTurn.elementsEnergy[UnityEngine.Random.Range(0, GameManager.instance.currentPlayerTurn.elementsEnergy.Length)];
         switch (elementType)
         {           case ElementType.Fuego:
                spriteRenderer.color = Color.red;
@@ -29,14 +30,16 @@ public class EnergyManager: Draggable
            case ElementType.Normal:
                spriteRenderer.color = Color.white;
                break;
-        }            }
-    private void LateUpdate()
-    {
-        //transform.position= GameManager.instance.energySpawn.position;
+        }         
     }
+    
     public override void DropInCard()
     {
         base.DropInCard();
-        targetCharacter.AddEnergy(energyCount, elementType);
+        if (GameManager.instance.GetControllerByCharacter(targetCharacter.data.charName) == target)
+        {
+            targetCharacter.AddEnergy(energyCount, elementType);
+            GameObject.Destroy(gameObject);
+        }
     }
 }

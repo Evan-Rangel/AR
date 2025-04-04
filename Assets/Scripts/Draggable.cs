@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class Draggable:MonoBehaviour
@@ -16,7 +15,6 @@ public class Draggable:MonoBehaviour
         {
             if (hit.collider.transform.parent.GetComponent<CharacterUIManager>() != null)
             {
-                // Debug.Log(hit.collider.gameObject.name);
                 targetCharacter = hit.collider.transform.parent.GetComponent<CharacterUIManager>();
             }
             
@@ -29,12 +27,6 @@ public class Draggable:MonoBehaviour
 
     public virtual void DropInCard()
     {
-        StartCoroutine(DestroyDraggable());
-    }
-
-    IEnumerator DestroyDraggable()
-    {
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
+        transform.position = GameManager.instance.energySpawn.position;
     }
 }

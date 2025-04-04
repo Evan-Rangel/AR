@@ -33,7 +33,6 @@ public class DragController : MonoBehaviour
         }
         else { return; }
 
-        // Lanzar un rayo desde la cámara al mundo 3D
         Ray ray = Camera.main.ScreenPointToRay(_screenPosition);
         RaycastHit hit;
 
@@ -59,8 +58,6 @@ public class DragController : MonoBehaviour
     {
         isDragActive = true;
         _lastDragged.gameObject.GetComponent<Draggable>().OnDrag();
-        //_lastDragged.transform.parent = null;
-        //_lastDragged.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
 
     void Drop()
