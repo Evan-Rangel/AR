@@ -38,7 +38,6 @@ public class ActionUIManager:MonoBehaviour
             energyCostTexts.SetActive(true);
             energyCostTexts.SetActive(true);
             energyCostTexts.GetComponent<TMP_Text>().text = actionData.energyCost.ToString();
-            //energyCostTexts[0].GetComponent<TMP_Text>().text = "X";
         }
     }
     void SetImageColor(Image _img, ElementType _type)

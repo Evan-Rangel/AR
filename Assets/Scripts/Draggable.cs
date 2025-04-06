@@ -17,7 +17,6 @@ public class Draggable:MonoBehaviour
             {
                 targetCharacter = hit.collider.transform.parent.GetComponent<CharacterUIManager>();
             }
-            
         }
         else
         {
@@ -27,6 +26,6 @@ public class Draggable:MonoBehaviour
 
     public virtual void DropInCard()
     {
-        transform.position = GameManager.instance.energySpawn.position;
+        transform.position = GameManager.instance.CenterPosition();
     }
 }

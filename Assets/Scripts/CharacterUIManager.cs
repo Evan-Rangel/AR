@@ -31,7 +31,7 @@ public class CharacterUIManager : MonoBehaviour
         {
             energyElements[elements] = 0;
         }
-        recieveDamageButton.GetComponent<Button>().onClick.AddListener(() => RecieveDamage(ref GameManager.instance.currentDamage));
+        recieveDamageButton.GetComponent<Button>().onClick.AddListener(() => RecieveDamage(ref GameManager.instance.currentDamage, GameManager.instance.elementDamage));
         deathEvent.AddListener(() => GameManager.instance.CharacterDeath(data.charName));
         deathEvent.AddListener(() => transform.root.gameObject.SetActive(false));
         deathEvent.AddListener(() => GameManager.instance.StartText(data.charName + " muere"));
@@ -45,9 +45,18 @@ public class CharacterUIManager : MonoBehaviour
     {
         playerNameTxt.text = _name;
     }
-    public void RecieveDamage(ref int damage)
+    public void RecieveDamage(ref int damage, ElementType elementAttack)
     {
-        currentHealth -= damage;
+        if (elementAttack == data.debility)
+        {
+            currentHealth -= 20 + damage;
+            GameManager.instance.StartText(data.charName + " recibe "+ damage+" + 20 de daño extra por debilidad");
+        }
+        else
+        {
+            currentHealth -= damage;
+            GameManager.instance.StartText(data.charName + " recibe " + damage + " de daño");
+        }
         if (currentHealth > data.health) currentHealth = data.health;
         characterHealthTxt.text = currentHealth.ToString() + "ps";
         GameManager.instance.DamageDeal(data.charName);
@@ -106,11 +115,9 @@ public class CharacterUIManager : MonoBehaviour
                 energyImages[count].GetComponentInChildren<TMP_Text>().gameObject.SetActive(true);
                 energyImages[count].GetComponentInChildren<TMP_Text>().text= energyElements[e].ToString();
                 SetCardColor(energyImages[count].GetComponent<Image>(), e);
-
                 count++;
             }
         }
-       
     }
     public void LoadActions(CharacterData data)
     {
@@ -132,7 +139,7 @@ public class CharacterUIManager : MonoBehaviour
     {
         if (energyElements[actionData.elementType]>= actionData.energyCost)
         {
-            GameManager.instance.ActiveAction(actionData.actionValue,data.charName );
+            GameManager.instance.ActiveAction(actionData.actionValue, data.charName, actionData.elementType );
             grid.SetActive(false);
             return;
         }

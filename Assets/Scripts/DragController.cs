@@ -14,7 +14,6 @@ public class DragController : MonoBehaviour
             instance = this;
         }
     }
-   
     private void Update()
     {
         if (isDragActive && (Input.GetMouseButtonDown(0) || (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended)))
@@ -53,13 +52,11 @@ public class DragController : MonoBehaviour
             }
         }
     }
-
     void InitDrag()
     {
         isDragActive = true;
         _lastDragged.gameObject.GetComponent<Draggable>().OnDrag();
     }
-
     void Drop()
     {
         _lastDragged.transform.gameObject.GetComponent<Draggable>().OnDrop();
@@ -70,7 +67,6 @@ public class DragController : MonoBehaviour
         catch { }
         isDragActive = false;
     }
-
     void Drag(Ray ray)
     {
         Plane plane = new Plane(Vector3.up, _lastDragged.transform.position); // Plano donde se moverá el objeto
@@ -81,5 +77,4 @@ public class DragController : MonoBehaviour
             _lastDragged.transform.position = _worldPosition;
         }
     }
-   
 }

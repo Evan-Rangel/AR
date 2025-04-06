@@ -10,6 +10,4 @@ public class CharacterData: ScriptableObject
     public ElementType debility;
     public CharacterData evolution;
     public List<ActionData> actions; 
-    
-
 }

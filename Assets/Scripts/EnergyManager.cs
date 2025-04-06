@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnergyManager: Draggable
@@ -12,7 +9,6 @@ public class EnergyManager: Draggable
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
     }
     private void Start()
     {
@@ -36,7 +32,7 @@ public class EnergyManager: Draggable
     public override void DropInCard()
     {
         base.DropInCard();
-        if (GameManager.instance.GetControllerByCharacter(targetCharacter.data.charName) == target)
+        if (GameManager.instance.GetPlayerByCharacterName(targetCharacter.data.charName) == target)
         {
             targetCharacter.AddEnergy(energyCount, elementType);
             GameObject.Destroy(gameObject);
