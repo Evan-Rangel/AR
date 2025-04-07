@@ -863,7 +863,7 @@ MonoBehaviour:
   <playerName>k__BackingField: Player 1
   playerNumber: 1
   pokeballHolder: {fileID: 1540367563}
-  pokeballs: 1
+  pokeballs: 3
   pokeballXSprite: {fileID: 21300000, guid: 79c92c281aa71b34ab2b4afd37e3fe64, type: 3}
 --- !u!4 &188369047
 Transform:
@@ -1324,7 +1324,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.9682697, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1707,6 +1707,7 @@ MonoBehaviour:
   Player01Txt: {fileID: 296233714}
   Player02Txt: {fileID: 1196096681}
   mainMenuButton: {fileID: 1300584378}
+  nextTurnButton: {fileID: 0}
   currentDamage: 0
   elementDamage: 0
   elementSpritesArray:
@@ -2602,6 +2603,10 @@ PrefabInstance:
     - target: {fileID: 2137768217564414354, guid: 06d17456dce67c24eabeb74e2c03c8c9, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718226793749300419, guid: 06d17456dce67c24eabeb74e2c03c8c9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3591380622421717682, guid: 06d17456dce67c24eabeb74e2c03c8c9, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -5007,7 +5012,7 @@ MonoBehaviour:
   <playerName>k__BackingField: Player 2
   playerNumber: 2
   pokeballHolder: {fileID: 1592316819}
-  pokeballs: 1
+  pokeballs: 3
   pokeballXSprite: {fileID: 21300000, guid: 79c92c281aa71b34ab2b4afd37e3fe64, type: 3}
 --- !u!4 &1089790372
 Transform:

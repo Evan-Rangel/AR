@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         GameManager.instance.mainMenuButton.SetActive(true);
     }
+
     public void AddCharacterToPlayer(GameObject _characterCard)
     {
         characterCards.Add(_characterCard);

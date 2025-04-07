@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Gefe/MenuGefe.unity
+    path: Assets/Scenes/MenuGefe.unity
     guid: 575de3f525ee4e74595fa013eed7405c
   - enabled: 1
     path: Assets/Scenes/ProyectoPokemon.unity

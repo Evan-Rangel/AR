@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3d31af1548f104293beddfd3600454, type: 3}
   m_Name: Celebi
   m_EditorClassIdentifier: 
-  health: 200
+  health: 120
   charName: Celebi
   affinity: 2
   debility: 0
-  evolution: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: ccba2e821f21b8942a7993ba0eaf1eaf, type: 2}
   - {fileID: 11400000, guid: 8833c837d177c654aa40e85e93e2e050, type: 2}

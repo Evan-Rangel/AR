@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3d31af1548f104293beddfd3600454, type: 3}
   m_Name: Infernape
   m_EditorClassIdentifier: 
-  health: 200
+  health: 80
   charName: Infernape
   affinity: 0
   debility: 1
-  evolution: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: ad76f13f2300c8e40a7dd57e47f673c5, type: 2}
   - {fileID: 11400000, guid: a2cb78742a4044548a74fad7a6401509, type: 2}

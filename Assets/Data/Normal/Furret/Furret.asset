@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3d31af1548f104293beddfd3600454, type: 3}
   m_Name: Furret
   m_EditorClassIdentifier: 
-  health: 200
+  health: 50
   charName: Furret
   affinity: 3
   debility: 3
-  evolution: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: b73bd887644a16840b4a92bdafd9c5a0, type: 2}
   - {fileID: 11400000, guid: e966aa840b07f024981bfa6103d10107, type: 2}

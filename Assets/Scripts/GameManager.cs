@@ -19,12 +19,18 @@ public class GameManager : MonoBehaviour
     string player1Name, player2Name;
     int currentCharsAlive = 0;
     public GameObject mainMenuButton;
+    [SerializeField] GameObject nextTurnButton;
 
     public int currentDamage;
     public ElementType elementDamage;
     IEnumerator showText;
     [SerializeField] Dictionary<string, PlayerController> pokemonsActives;
+    string lastPokemonLose;
+
     public Dictionary<ElementType, Sprite> elementSprites;
+
+
+
     [SerializeField] ElementSprite[] elementSpritesArray;   
     public PlayerController GetPlayerByCharacterName(string characterName)
     {
@@ -107,7 +113,14 @@ public class GameManager : MonoBehaviour
         {
             characterPositions[pokemonName] = characterCard.transform;
         }
-
+        if (lastPokemonLose != ""&& lastPokemonLose!=null)
+        {
+            pokemonsActives[lastPokemonLose].AddCharacterToPlayer(characterCard);
+            characterCard.GetComponent<CharacterUIManager>().SetPlayerName(pokemonsActives[lastPokemonLose].playerName);
+            pokemonsActives[pokemonName] = pokemonsActives[lastPokemonLose];
+            lastPokemonLose = "";
+            return;
+        }
         if (currentCharsAlive < 4)
         {
             currentCharsAlive++;
@@ -123,12 +136,9 @@ public class GameManager : MonoBehaviour
                 characterCard.GetComponent<CharacterUIManager>().SetPlayerName(playerTwo.playerName);
                 playerTwo.AddCharacterToPlayer(characterCard);
                 pokemonsActives[pokemonName] = playerTwo;
-
                 if (currentPlayerTurn == null)
                 {
-
                     StartCoroutine(DelayTurn());
-
                 }
             }
         }
@@ -140,7 +150,6 @@ public class GameManager : MonoBehaviour
     }
     void Turn(PlayerController _newPlayerTurn)
     {
-
         currentPlayerTurn = _newPlayerTurn;
         currentPlayerTurn.ActiveSelectedCards();
         SpawnEnergy();
@@ -155,6 +164,7 @@ public class GameManager : MonoBehaviour
     {
         pokemonsActives[pokemonName].LosePokeball();
         pokemonsActives[pokemonName].DisableDamageableCards();
+        lastPokemonLose = pokemonName;
         currentCharsAlive--;
     }
     public void StartText(string _text) { StopCoroutine(showText); showText = ShowText(_text); StartCoroutine(showText); }
@@ -170,6 +180,7 @@ public class GameManager : MonoBehaviour
     }
     public void SpawnEnergy() 
     {
+        //Target de energia es el jugador con turno
         GameObject energy = Instantiate(energyPrefab, CenterPosition() , Quaternion.Euler(90, 0, 0));//, Camera.main.transform.rotation, Camera.main.transform);
         energy.GetComponent<EnergyManager>().target= currentPlayerTurn;
     }

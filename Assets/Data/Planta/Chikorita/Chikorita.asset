@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3d31af1548f104293beddfd3600454, type: 3}
   m_Name: Chikorita
   m_EditorClassIdentifier: 
-  health: 200
+  health: 180
   charName: Chikorita
   affinity: 2
   debility: 0
-  evolution: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: 4b317652f2b45a84e9b68e0f7be480a4, type: 2}
   - {fileID: 11400000, guid: 540668b5879a6b845a7de66341e6df3c, type: 2}

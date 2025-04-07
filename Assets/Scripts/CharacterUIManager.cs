@@ -69,7 +69,7 @@ public class CharacterUIManager : MonoBehaviour
         energyElements[element] += _energy;
 
         int count = 0;
-        GameManager.instance.StartText(data.charName +" recive energia de " + element.ToString());
+        GameManager.instance.StartText(data.charName +" recibe energia de " + element.ToString());
         foreach (ElementType e in Enum.GetValues(typeof(ElementType)))
         {
             if (energyElements[e] > 0)

@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Machoke
   m_EditorClassIdentifier: 
   health: 200
-  charName: Machoke
+  charName: Machoke Chief
   affinity: 3
   debility: 3
-  evolution: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: fb1345ec26ef06b438c39efdfc7e2d4e, type: 2}
   - {fileID: 11400000, guid: 3122aaa38f99706428fe6f51e2b49bc3, type: 2}

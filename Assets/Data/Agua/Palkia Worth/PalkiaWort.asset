@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3d31af1548f104293beddfd3600454, type: 3}
   m_Name: PalkiaWort
   m_EditorClassIdentifier: 
-  health: 200
+  health: 150
   charName: Palkia Wort
   affinity: 1
   debility: 2
-  evolution: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: 8d64d21e19cb0854c81b7e375f89aa89, type: 2}
   - {fileID: 11400000, guid: 2567f01a7ef50794eb4503d679e7223b, type: 2}

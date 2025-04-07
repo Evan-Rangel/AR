@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3d31af1548f104293beddfd3600454, type: 3}
   m_Name: Piplut
   m_EditorClassIdentifier: 
-  health: 80
+  health: 100
   charName: Piplut
   affinity: 1
   debility: 2
-  evolution: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: 7a7290a8328e23b4b94562c7e2b6acd9, type: 2}
   - {fileID: 11400000, guid: 9e3ee88b8ade6ba48bd59f8ce91dd76f, type: 2}
