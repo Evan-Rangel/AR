@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3d31af1548f104293beddfd3600454, type: 3}
+  m_Name: Infernape
+  m_EditorClassIdentifier: 
+  health: 200
+  charName: Infernape
+  affinity: 0
+  debility: 1
+  evolution: {fileID: 0}
+  actions:
+  - {fileID: 11400000, guid: ad76f13f2300c8e40a7dd57e47f673c5, type: 2}
+  - {fileID: 11400000, guid: a2cb78742a4044548a74fad7a6401509, type: 2}
+  - {fileID: 11400000, guid: 0e797607d88c7d4459f8bcbc187d38b8, type: 2}
+  - {fileID: 11400000, guid: 95792eab050e38849abaa98b5c807fe0, type: 2}

@@ -38,7 +38,6 @@ public class CharacterUIManager : MonoBehaviour
 
         recieveDamageButton.SetActive(false);
         selectCardButton.SetActive(false);
-
     }
    
     public void SetPlayerName(string _name)
@@ -47,7 +46,7 @@ public class CharacterUIManager : MonoBehaviour
     }
     public void RecieveDamage(ref int damage, ElementType elementAttack)
     {
-        if (elementAttack == data.debility)
+        if (elementAttack == data.debility && elementAttack != data.affinity)
         {
             currentHealth -= 20 + damage;
             GameManager.instance.StartText(data.charName + " recibe "+ damage+" + 20 de daño extra por debilidad");
@@ -78,9 +77,7 @@ public class CharacterUIManager : MonoBehaviour
                 energyImages[count].SetActive(true);
                 energyTxt[count].SetActive(true);
                 energyTxt[count].GetComponent<TMP_Text>().text = energyElements[e].ToString();
-
-                SetCardColor(energyImages[count].GetComponent<Image>(), e);
-
+                energyImages[count].GetComponent<Image>().sprite = GameManager.instance.elementSprites[e];
                 count++;
             }
         }
@@ -99,29 +96,10 @@ public class CharacterUIManager : MonoBehaviour
     {
         grid.SetActive(_active);
     }
-    
-    public void LoadEnergyImages(int _energy, ElementType element)
-    {
-        foreach (GameObject img in energyImages)
-        {
-            img.SetActive(false);
-        }
-        int count = 0;
-        foreach (ElementType e in Enum.GetValues(typeof(ElementType)))
-        {
-            if (energyElements[e]>0)
-            {
-                energyImages[count].SetActive(true);
-                energyImages[count].GetComponentInChildren<TMP_Text>().gameObject.SetActive(true);
-                energyImages[count].GetComponentInChildren<TMP_Text>().text= energyElements[e].ToString();
-                SetCardColor(energyImages[count].GetComponent<Image>(), e);
-                count++;
-            }
-        }
-    }
     public void LoadActions(CharacterData data)
     {
         currentHealth = data.health;
+        characterName.text = "";//data.charName;
         characterHealthTxt.text = currentHealth.ToString() +"ps";
         foreach (ActionData action in data.actions)
         {
@@ -129,7 +107,6 @@ public class CharacterUIManager : MonoBehaviour
             ActionUIManager actionUIManager = actionUI.GetComponent<ActionUIManager>();
             actionUIManager.SetActionData(action);
             SetCardColor(background, data.affinity);
-            characterName.text = data.charName;
             actionUI.GetComponentInChildren<Button>().onClick.AddListener(() => ActionSelected(action));
         }
         grid.SetActive(false);

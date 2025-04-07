@@ -6,5 +6,5 @@ public class ActionData : ScriptableObject
     public ElementType elementType;
     public string actionName;
     [Range(1,10)]public int energyCost;
-    [Range(0, 200)] public int actionValue;
+    [Range(0, 500)] public int actionValue;
 }

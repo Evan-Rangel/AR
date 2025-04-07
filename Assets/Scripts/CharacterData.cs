@@ -8,6 +8,5 @@ public class CharacterData: ScriptableObject
     public string charName;
     public ElementType affinity;
     public ElementType debility;
-    public CharacterData evolution;
     public List<ActionData> actions; 
 }

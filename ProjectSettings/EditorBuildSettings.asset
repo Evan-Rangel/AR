@@ -5,12 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/ARminiGame.unity
-    guid: a2beb7beae87d744fbe6335157fbe90f
+    path: Assets/Gefe/MenuGefe.unity
+    guid: 575de3f525ee4e74595fa013eed7405c
+  - enabled: 1
+    path: Assets/Scenes/ProyectoPokemon.unity
+    guid: a778f760e137e6d45ac80e10b74491a8
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: ac8cddbd8b2e6ee4c85d613572723a06, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 0129d8d783ced0943affa4fbcce3a0de, type: 2}

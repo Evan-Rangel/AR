@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,10 +18,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text Player02Txt;
     string player1Name, player2Name;
     int currentCharsAlive = 0;
+    public GameObject mainMenuButton;
+
     public int currentDamage;
     public ElementType elementDamage;
     IEnumerator showText;
     [SerializeField] Dictionary<string, PlayerController> pokemonsActives;
+    public Dictionary<ElementType, Sprite> elementSprites;
+    [SerializeField] ElementSprite[] elementSpritesArray;   
     public PlayerController GetPlayerByCharacterName(string characterName)
     {
         if (!pokemonsActives.ContainsKey(characterName)) return null;
@@ -42,6 +47,11 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        elementSprites = new Dictionary<ElementType, Sprite>();
+        foreach (ElementSprite e in elementSpritesArray)
+        { 
+            elementSprites[e.elementType] = e.elementSprite;
+        }
         Player01Txt.text= playerOne.playerName; 
         Player02Txt.text= playerTwo.playerName;
         StartText(playerOne.playerName + " muestra tu Pokemon");
@@ -97,6 +107,7 @@ public class GameManager : MonoBehaviour
         {
             characterPositions[pokemonName] = characterCard.transform;
         }
+
         if (currentCharsAlive < 4)
         {
             currentCharsAlive++;
@@ -162,4 +173,18 @@ public class GameManager : MonoBehaviour
         GameObject energy = Instantiate(energyPrefab, CenterPosition() , Quaternion.Euler(90, 0, 0));//, Camera.main.transform.rotation, Camera.main.transform);
         energy.GetComponent<EnergyManager>().target= currentPlayerTurn;
     }
+    public void ReturnToMainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+}
+[Serializable]
+public class ElementSprite
+{ 
+    public ElementType elementType;
+    public Sprite elementSprite;
+}
+public enum ElementType
+{
+    Fuego, Agua, Planta, Normal
 }

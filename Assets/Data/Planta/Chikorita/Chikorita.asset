@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3d31af1548f104293beddfd3600454, type: 3}
+  m_Name: Chikorita
+  m_EditorClassIdentifier: 
+  health: 200
+  charName: Chikorita
+  affinity: 2
+  debility: 0
+  evolution: {fileID: 0}
+  actions:
+  - {fileID: 11400000, guid: 4b317652f2b45a84e9b68e0f7be480a4, type: 2}
+  - {fileID: 11400000, guid: 540668b5879a6b845a7de66341e6df3c, type: 2}
+  - {fileID: 11400000, guid: a430ee440a275f54292f82ffd9bec3e0, type: 2}
+  - {fileID: 11400000, guid: e2712e4e1b290f64a8480ea171233133, type: 2}

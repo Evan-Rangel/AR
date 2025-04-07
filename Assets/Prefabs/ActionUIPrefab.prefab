@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.101960786}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -285,12 +285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea148c9a66b8cb4a83a3f84821a88c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 1689204848355485306}
-  energyCostImages:
-  - {fileID: 3200688095338616187}
-  - {fileID: 1989877762264269197}
-  - {fileID: 1913643279726688318}
-  energyCostTexts: {fileID: 7429000049345279521}
   <energyCost>k__BackingField: 0
   <elementType>k__BackingField: 0
 --- !u!1 &3200688095338616187
@@ -386,7 +380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9132453350875061195
 RectTransform:
   m_ObjectHideFlags: 0

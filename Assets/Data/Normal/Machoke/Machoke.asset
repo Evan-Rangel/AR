@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3d31af1548f104293beddfd3600454, type: 3}
+  m_Name: Machoke
+  m_EditorClassIdentifier: 
+  health: 200
+  charName: Machoke
+  affinity: 3
+  debility: 3
+  evolution: {fileID: 0}
+  actions:
+  - {fileID: 11400000, guid: fb1345ec26ef06b438c39efdfc7e2d4e, type: 2}
+  - {fileID: 11400000, guid: 3122aaa38f99706428fe6f51e2b49bc3, type: 2}
+  - {fileID: 11400000, guid: 412f3a94f5a27ad458c5751aa9bb4968, type: 2}
+  - {fileID: 11400000, guid: 768028eb35d9f5e4ca9eb52e0d8b0721, type: 2}

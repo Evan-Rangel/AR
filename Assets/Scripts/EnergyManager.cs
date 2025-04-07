@@ -12,21 +12,9 @@ public class EnergyManager: Draggable
     }
     private void Start()
     {
-        elementType= GameManager.instance.currentPlayerTurn.elementsEnergy[UnityEngine.Random.Range(0, GameManager.instance.currentPlayerTurn.elementsEnergy.Length)];
-        switch (elementType)
-        {           case ElementType.Fuego:
-               spriteRenderer.color = Color.red;
-               break;
-           case ElementType.Agua:
-               spriteRenderer.color = Color.blue;
-               break;
-           case ElementType.Planta:
-               spriteRenderer.color = Color.green;
-               break;
-           case ElementType.Normal:
-               spriteRenderer.color = Color.white;
-               break;
-        }         
+        elementType= GameManager.instance.currentPlayerTurn.elementsEnergy[UnityEngine.Random.Range(0, GameManager.instance.currentPlayerTurn.elementsEnergy.Count)];
+        
+        spriteRenderer.sprite = GameManager.instance.elementSprites[elementType];
     }
     
     public override void DropInCard()

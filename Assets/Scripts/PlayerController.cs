@@ -6,15 +6,16 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public List<GameObject> characterCards { get; private set; }
-    public ElementType[] elementsEnergy; 
+    public List<ElementType> elementsEnergy; 
+
+
     [field: SerializeField] public PlayerController enemyPlayer { get; private set; }
     [field: SerializeField]public string playerName { get; private set; }
     [SerializeField] string playerNumber;
 
     [SerializeField] GameObject pokeballHolder;
-    [SerializeField] int pokeballs = 3;
+    [field:SerializeField]public int pokeballs = 3;
     [SerializeField] Sprite pokeballXSprite;
-
     
     Image[] currentPokeball;
     
@@ -25,7 +26,15 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        playerName = PlayerPrefs.GetString("NombreJugador" + playerNumber);
+        string data = PlayerPrefs.GetString("ElementoJugador" + playerNumber);
+        string[] elements = data.Split(',');
+        foreach(string element in elements)
+        {
+            if (System.Enum.TryParse(element, out ElementType elementType))
+            {
+                elementsEnergy.Add(elementType);
+            }
+        }
     }
     public void LosePokeball()
     {
@@ -41,6 +50,8 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         GameManager.instance.StartText(enemyPlayer.playerName + " Gano");
+        yield return new WaitForSeconds(1.5f);
+        GameManager.instance.mainMenuButton.SetActive(true);
     }
     public void AddCharacterToPlayer(GameObject _characterCard)
     {
@@ -74,7 +85,4 @@ public class PlayerController : MonoBehaviour
             card.GetComponent<CharacterUIManager>().ActiveCard(false);
         }
     }
-}
-public enum ElementType {
-Fuego,Agua,Planta, Normal
 }

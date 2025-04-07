@@ -77,24 +77,19 @@ public class MenuController : MonoBehaviour
 
     private void ValidarConfirmacion()
     {
-        bool nombresValidos = !string.IsNullOrEmpty(inputNombre1.text) && !string.IsNullOrEmpty(inputNombre2.text);
         bool elementosValidos = elementosJugador1.Count > 0 && elementosJugador2.Count > 0;
-        botonConfirmar.interactable = nombresValidos && elementosValidos;
+        botonConfirmar.interactable =elementosValidos;
     }
 
     public void ConfirmarJugadores()
     {
-        nombreJugador1 = inputNombre1.text;
-        nombreJugador2 = inputNombre2.text;
 
-        PlayerPrefs.SetString("NombreJugador1", nombreJugador1);
         PlayerPrefs.SetString("ElementoJugador1", string.Join(",", elementosJugador1));
 
-        PlayerPrefs.SetString("NombreJugador2", nombreJugador2);
         PlayerPrefs.SetString("ElementoJugador2", string.Join(",", elementosJugador2));
         PlayerPrefs.Save();
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene("EscenaJuego");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("ProyectoPokemon");
     }
 
     private void ResetearBotones()
